@@ -3,11 +3,9 @@ import 'package:path_provider/path_provider.dart';
 import 'blocs/bloc_export.dart';
 import 'pages/task_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getTemporaryDirectory(),
-  );
+  HydratedBloc.storage = await HydratedStorage.build(storageDirectory: await getApplicationCacheDirectory());
   runApp(const MyApp());
 }
 

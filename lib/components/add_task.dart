@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:todo_app_bloc/blocs/bloc_export.dart';
+
 import 'package:todo_app_bloc/models/task.dart';
 
 class AddTaskWidget extends StatefulWidget {
@@ -13,16 +13,9 @@ class AddTaskWidget extends StatefulWidget {
 }
 
 class _AddTaskWidgetState extends State<AddTaskWidget> {
-  late SharedPreferences sharedPreferences;
-
   @override
   void initState() {
-    initSharedPreferences();
     super.initState();
-  }
-
-  void initSharedPreferences() async {
-    sharedPreferences = await SharedPreferences.getInstance();
   }
 
   @override
@@ -55,9 +48,11 @@ class _AddTaskWidgetState extends State<AddTaskWidget> {
               ElevatedButton(
                   onPressed: () {
                     var task = Task(
-                      title: titleController.text, id: '',
+                      title: titleController.text,
+                      id: '',
                     );
                     context.read<TaskBloc>().add(AddTask(task: task));
+
                     Navigator.pop(context);
                   },
                   child: const Text('Add')),
